@@ -1,0 +1,9 @@
+from datetime import datetime, timedelta
+
+print("=== CALCULADORA DE IDADE ===")
+data_nascimento = input("Digite sua data de nascimento (DD/MM/AAAA): ")
+
+nascimento = datetime.strptime(data_nascimento "%d/%m/%Y")
+hoje = datetime.today()
+
+anos = hoje.year - nascimento.year
