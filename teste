@@ -1,0 +1,40 @@
+from datetime import datetime, timedelta
+
+print("=== CALCULADORA DE IDADE ===")
+data_str = input("Digite sua data de nascimento (DD/MM/AAAA): ")
+
+# Converter para objeto datetime
+nascimento = datetime.strptime(data_str, "%d/%m/%Y")
+hoje = datetime.today()
+
+# Calcular idade detalhada
+anos = hoje.year - nascimento.year
+meses = hoje.month - nascimento.month
+dias = hoje.day - nascimento.day
+
+if dias < 0:
+    meses -= 1
+    dias += (hoje.replace(day=1) - timedelta(days=1)).day
+if meses < 0:
+    anos -= 1
+    meses += 12
+
+# Total de dias e horas vividos
+total_dias = (hoje - nascimento).days
+total_horas = total_dias * 24
+
+# Próximo aniversário
+proximo_aniversario = nascimento.replace(year=hoje.year)
+if proximo_aniversario < hoje:
+    proximo_aniversario = proximo_aniversario.replace(year=hoje.year + 1)
+
+faltam_dias = (proximo_aniversario - hoje).days
+
+# Dia da semana
+dias_semana = ["segunda-feira", "terça-feira", "quarta-feira",
+               "quinta-feira", "sexta-feira", "sábado", "domingo"]
+dia_semana_nasc = dias_semana[nascimento.weekday()]
+dia_semana_prox = dias_semana[proximo_aniversario.weekday()]
+
+# Data em que completou 10.000 dias
+data_10000 = nascimento
